@@ -1,0 +1,26 @@
+{
+  "dependencies": {},
+  "description": "React Native wrapper for native iOS Facebook SDK login button and manager",
+  "devDependencies": {},
+  "directories": {},
+  "name": "react-native-amplitude",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "react-native": ">=0.14.2"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/euwyn/react-native-amplitude.git"
+  },
+  "author": "Euwyn Poon <euwynpoon@gmail.com> (http://euwyn.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/euwyn/react-native-amplitude/issues"
+  },
+  "homepage": "https://github.com/euwyn/react-native-amplitude#readme"
+}
