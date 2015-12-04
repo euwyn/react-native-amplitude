@@ -11,6 +11,13 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySeyIterator;
+import com.facebook.react.bridge.ReadableType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Map;
 
 public class AmplitudeAndroidModule extends ReactContextBaseJavaModule {
@@ -40,6 +47,18 @@ public class AmplitudeAndroidModule extends ReactContextBaseJavaModule {
   }
   
   @ReactMethod
+  public void logEventWithProps(String identifier, ReadableMap properties) {
+    
+    try {
+      JSONObject jProperties = convertReadableToJsonObject(properties);
+      Amplitude.getInstance().logEvent(identifier, jProperties);
+    } catch (JSONException e) {
+      return;
+    }
+    
+  }
+  
+  @ReactMethod
   public void trackSessionEvents(boolean bool) {
     Amplitude.getInstance().trackSessionEvents(bool);
   }
@@ -48,5 +67,38 @@ public class AmplitudeAndroidModule extends ReactContextBaseJavaModule {
   public void setUserId(String id) {
     Amplitude.getInstance().setUserId(id);
   }
+  
+  @ReactMethod
+  public void logRevenue(String productIdentifier, int quantity, double amount) {
+    Amplitude.getInstance().logRevenue(productIdentifier, quantity, amount);
+  }
+  
+  public static JSONObject convertReadableToJsonObject(ReadableMap map) throws JSONException{
+    JSONObject jsonObj = new JSONObject();
+    ReadableMapKeySeyIterator it = map.keySetIterator();
+      
+    while (it.hasNextKey()) {
+      String key = it.nextKey();
+      ReadableType type = map.getType(key);
+      switch (type) {
+        case Map:
+            jsonObj.put(key, convertReadableToJsonObject(map.getMap(key)));
+            break;
+        case String:
+            jsonObj.put(key, map.getString(key));
+            break;
+        case Number:
+            jsonObj.put(key, map.getDouble(key));
+            break;
+        case Boolean:
+            jsonObj.put(key, map.getBoolean(key));
+            break;
+        case Null:
+            jsonObj.put(key, null);
+            break;
+      }
+    }
+    return jsonObj;
+ }
      
 }
