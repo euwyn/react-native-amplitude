@@ -6,7 +6,7 @@
   "name": "react-native-amplitude",
   "optionalDependencies": {},
   "peerDependencies": {
-    "react-native": ">=0.15.0"
+    "react-native": ">=0.16.0"
   },
   "version": "1.0.0",
   "main": "index.js",

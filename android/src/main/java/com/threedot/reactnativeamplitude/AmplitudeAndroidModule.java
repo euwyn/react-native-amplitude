@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySeyIterator;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 
 import org.json.JSONException;
@@ -75,7 +75,7 @@ public class AmplitudeAndroidModule extends ReactContextBaseJavaModule {
   
   public static JSONObject convertReadableToJsonObject(ReadableMap map) throws JSONException{
     JSONObject jsonObj = new JSONObject();
-    ReadableMapKeySeyIterator it = map.keySetIterator();
+    ReadableMapKeySetIterator it = map.keySetIterator();
       
     while (it.hasNextKey()) {
       String key = it.nextKey();
